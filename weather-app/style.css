@@ -1,28 +1,20 @@
-/* Root variables for colors */
 :root {
     --primary-color: #3b82f6;
-    /* Bright blue */
     --primary-hover: #2563eb;
-    /* Darker blue */
     --text-color-light: #222831;
     --bg-gradient-start: #74ebd5;
     --bg-gradient-end: #ACB6E5;
     --container-bg: #ffffff;
     --card-bg: #f0f4ff;
     --shadow-light: rgba(59, 130, 246, 0.25);
-    /* subtle blue shadow */
-
-    /* Dark mode */
     --text-color-dark: #e0e6f2;
     --container-bg-dark: #121826;
     --card-bg-dark: #1f2437;
     --shadow-dark: rgba(21, 32, 90, 0.7);
     --primary-color-dark: #60a5fa;
-    /* lighter blue */
     --primary-hover-dark: #3b82f6;
 }
 
-/* Base light theme */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -37,14 +29,11 @@ body {
     position: relative;
 }
 
-/* Container styling */
 .container {
     position: relative;
-    /* so toggle button can be absolute inside */
     background-color: var(--container-bg);
     border-radius: 20px;
     padding: 40px 35px 60px;
-    /* bottom padding a bit bigger for breathing room */
     box-shadow: 0 10px 40px var(--shadow-light);
     max-width: 520px;
     width: 100%;
@@ -52,7 +41,6 @@ body {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Dark mode toggle button inside container */
 #dark-toggle {
     position: absolute;
     top: 20px;
@@ -78,7 +66,6 @@ body {
     background-color: var(--primary-hover);
 }
 
-/* Form layout */
 form {
     display: flex;
     gap: 14px;
@@ -163,7 +150,6 @@ button:hover {
     color: #475569;
 }
 
-/* Sections */
 #forecast,
 #astronomy,
 #timezone,
@@ -203,7 +189,6 @@ button:hover {
     flex-shrink: 0;
 }
 
-/* Error message */
 #error-message {
     color: #ef4444;
     margin-top: 16px;
@@ -211,12 +196,10 @@ button:hover {
     font-size: 1.2rem;
 }
 
-/* Hidden class */
 .hidden {
     display: none !important;
 }
 
-/* Dark mode styles */
 body.dark {
     background: linear-gradient(to bottom, #0f172a, #1e293b);
     color: var(--text-color-dark);
@@ -259,7 +242,6 @@ body.dark #air-quality {
     color: var(--text-color-dark);
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
     form {
         flex-direction: column;
