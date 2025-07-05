@@ -1,91 +1,281 @@
+/* Root variables for colors */
+:root {
+    --primary-color: #3b82f6;
+    /* Bright blue */
+    --primary-hover: #2563eb;
+    /* Darker blue */
+    --text-color-light: #222831;
+    --bg-gradient-start: #74ebd5;
+    --bg-gradient-end: #ACB6E5;
+    --container-bg: #ffffff;
+    --card-bg: #f0f4ff;
+    --shadow-light: rgba(59, 130, 246, 0.25);
+    /* subtle blue shadow */
+
+    /* Dark mode */
+    --text-color-dark: #e0e6f2;
+    --container-bg-dark: #121826;
+    --card-bg-dark: #1f2437;
+    --shadow-dark: rgba(21, 32, 90, 0.7);
+    --primary-color-dark: #60a5fa;
+    /* lighter blue */
+    --primary-hover-dark: #3b82f6;
+}
+
+/* Base light theme */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom, #74ebd5, #ACB6E5);
-    color: #333;
+    background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
+    color: var(--text-color-light);
     display: flex;
     justify-content: center;
     align-items: start;
     padding: 40px 20px;
     min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+    position: relative;
 }
 
+/* Container styling */
 .container {
-    background-color: white;
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    position: relative;
+    /* so toggle button can be absolute inside */
+    background-color: var(--container-bg);
+    border-radius: 20px;
+    padding: 40px 35px 60px;
+    /* bottom padding a bit bigger for breathing room */
+    box-shadow: 0 10px 40px var(--shadow-light);
+    max-width: 520px;
     width: 100%;
     text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark mode toggle button inside container */
+#dark-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px var(--shadow-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+}
+
+#dark-toggle:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Form layout */
+form {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 input[type="text"] {
-    padding: 10px;
+    padding: 14px 18px;
     width: 70%;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-right: 10px;
+    font-size: 1.15rem;
+    border: 2px solid #a3bffa;
+    border-radius: 12px;
+    color: var(--text-color-light);
+    background-color: var(--card-bg);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    font-weight: 500;
+}
+
+input[type="text"]::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    background-color: var(--container-bg);
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 1em;
+    padding: 14px 28px;
+    font-size: 1.15rem;
     border: none;
-    background-color: #4caf50;
+    background-color: var(--primary-color);
     color: white;
-    border-radius: 8px;
+    border-radius: 14px;
     cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: var(--primary-hover);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.6);
 }
 
+/* Card styling */
 .card {
-    margin-top: 20px;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 12px;
+    background-color: var(--card-bg);
+    margin-top: 25px;
+    padding: 30px 30px 45px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow-light);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.hidden {
-    display: none;
+#weather-icon {
+    max-width: 130px;
+    margin: 20px auto 20px;
+    display: block;
 }
 
-#error-message {
-    color: red;
-    margin-top: 10px;
+#temperature {
+    font-size: 2.7rem;
+    margin: 12px 0 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
+#description,
+#humidity,
+#wind,
+#uv,
+#wind-dir {
+    font-size: 1.2rem;
+    margin: 8px 0;
+    font-weight: 600;
+    color: #475569;
+}
+
+/* Sections */
 #forecast,
 #astronomy,
 #timezone,
 #air-quality {
-    margin-top: 30px;
-    background-color: #ffffffcc;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: 35px;
+    background-color: #e1e7ffcc;
+    padding: 20px 22px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+    text-align: left;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#forecast h3,
+#astronomy h3,
+#timezone h3,
+#air-quality h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: 0.03em;
 }
 
 .forecast-day {
-    margin-top: 10px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #334155;
 }
 
-img {
-    max-width: 100px;
-    margin: 10px auto;
+.forecast-day img {
+    max-width: 65px;
+    flex-shrink: 0;
 }
 
+/* Error message */
+#error-message {
+    color: #ef4444;
+    margin-top: 16px;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Dark mode styles */
+body.dark {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+    color: var(--text-color-dark);
+}
+
+body.dark .container {
+    background-color: var(--container-bg-dark);
+    box-shadow: 0 10px 40px var(--shadow-dark);
+}
+
+body.dark input[type="text"] {
+    background-color: var(--card-bg-dark);
+    border-color: #475569;
+    color: var(--text-color-dark);
+}
+
+body.dark input[type="text"]:focus {
+    background-color: var(--container-bg-dark);
+    border-color: var(--primary-color-dark);
+}
+
+body.dark button {
+    background-color: var(--primary-color-dark);
+    box-shadow: 0 6px 18px var(--primary-color-dark);
+    color: #f0f9ff;
+}
+
+body.dark button:hover {
+    background-color: var(--primary-hover-dark);
+    box-shadow: 0 8px 24px var(--primary-hover-dark);
+}
+
+body.dark .card,
+body.dark #forecast,
+body.dark #astronomy,
+body.dark #timezone,
+body.dark #air-quality {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 10px 30px var(--shadow-dark);
+    color: var(--text-color-dark);
+}
+
+/* Responsive adjustments */
 @media (max-width: 600px) {
-    input[type="text"] {
-        width: 100%;
-        margin-bottom: 10px;
+    form {
+        flex-direction: column;
     }
 
+    input[type="text"],
     button {
         width: 100%;
+        margin: 0 0 18px 0;
+    }
+
+    #dark-toggle {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
     }
 }
